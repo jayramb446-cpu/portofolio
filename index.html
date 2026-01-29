@@ -1,0 +1,549 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta charset="UTF-8">
+  <title>M. Dinesh - Portfolio</title>
+  <style>
+    * {
+      margin: 0;
+      padding: 0;
+      box-sizing: border-box;
+    }
+
+    html {
+      scroll-behavior: smooth;
+    }
+
+    body {
+      font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+      color: #ffffff;
+      position: relative;
+      min-height: 100vh;
+      z-index: 0;
+    }
+
+    #bg-video {
+      position: fixed;
+      top: 0;
+      left: 0;
+      min-width: 100vw;
+      min-height: 100vh;
+      width: auto;
+      height: auto;
+      z-index: -2;
+      object-fit: cover;
+    }
+
+    body::before {
+      content: "";
+      position: fixed;
+      top: 0;
+      left: 0;
+      width: 100%;
+      height: 100%;
+      background: rgba(0, 1, 4, 0.244);
+      z-index: -1;
+    }
+    section {
+  transition: opacity 0.8s ease, filter 0.6s ease;
+    }
+
+    section.dimmed {
+      opacity: 0.9;
+      filter: blur(10px);
+      pointer-events: none;
+    }
+
+
+    .main-header {
+      text-align: center;
+      padding: 2rem 1rem;
+      background-color: transparent;
+      backdrop-filter: blur(10px);
+      box-shadow: 0 4px 12px rgba(46, 45, 45, 0.4);
+      position: sticky;
+      top: 0;
+      z-index: 10;
+    }
+
+    .name-title {
+      font-size: 2.5rem;
+      color: #ffffff;
+    }
+
+    .role-subtitle {
+      font-size: 1.2rem;
+      color: #4dafff;
+    }
+
+    .main-nav ul {
+      display: flex;
+      justify-content: center;
+      gap: 20px;
+      list-style: none;
+      flex-wrap: wrap;
+      margin-top: 1rem;
+    }
+
+    .main-nav a {
+      color: #ede3e3;
+      text-decoration: none;
+      font-weight: 500;
+      transition: color 0.3s;
+    }
+
+    .main-nav a:hover {
+      color: #1d84d9;
+    }
+
+    section {
+      padding: 60px 20px;
+      margin: 50px auto;
+      background-color: rgba(13, 13, 13, 0.409);
+      box-shadow: 0 4px 12px rgba(10, 1, 36, 0.4);
+      border-radius: 10px;
+      max-width: 1100px;
+    }
+
+    .section-title {
+      font-size: 2rem;
+      margin-bottom: 1rem;
+      border-left: 4px solid #e40ee4;
+      padding-left: 10px;
+    }
+
+    .skills-grid {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(150px, 1fr));
+      gap: 15px;
+      margin-top: 1rem;
+    }
+
+    .skills-grid div {
+      background-color: rgba(0, 0, 0, 0.98);
+      padding: 1rem;
+      border-radius: 8px;
+      text-align: center;
+      font-weight: bold;
+      box-shadow: 0 3px 6px rgba(110, 110, 110, 0.3);
+    }
+
+    .skills-grid img {
+      width: 50px;
+      height: 50px;
+      margin-bottom: 0.5rem;
+    }
+
+    .profile-cards {
+      display: flex;
+      flex-wrap: wrap;
+      justify-content: center;
+      gap: 20px;
+      margin-top: 1rem;
+    }
+
+    .profile-box {
+      background-color: rgba(0, 0, 0, 0.916);
+      color: #e4e5ed;
+      padding: 1.5rem;
+      border-radius: 10px;
+      text-align: center;
+      width: 260px;
+      text-decoration: none;
+      transition: transform 0.3s ease;
+      box-shadow: 0 4px 10px rgba(45, 44, 44, 0.5);
+    }
+
+    .profile-box:hover {
+      transform: translateY(-5px);
+    }
+
+    .profile-box h3 {
+      color: #11bcec;
+      margin-bottom: 0.5rem;
+    }
+
+    .contact-box {
+      background-color: rgba(0, 0, 0, 0.963);
+      padding: 1.5rem;
+      border-radius: 10px;
+      text-align: center;
+      max-width: 400px;
+      margin: 0 auto;
+      box-shadow: 0 4px 10px rgba(62, 59, 59, 0.5);
+    }
+
+    .contact-box a {
+      color: #d8d8df;
+      text-decoration: none;
+    }
+
+    ul li {
+      margin-bottom: 10px;
+    }
+
+    .certification-list {
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      gap: 20px;
+    }
+
+    .certification-box {
+      background-color: rgba(0, 0, 0, 0.97);
+      padding: 1.5rem;
+      border-radius: 10px;
+      text-align: center;
+      max-width: 600px;
+      width: 100%;
+      color: #5774e6;
+      box-shadow: 0 4px 10px rgba(58, 55, 55, 0.5);
+    }
+
+    .pdf-link {
+      display: inline-block;
+      margin-top: 10px;
+      padding: 8px 16px;
+      background-color: #070707;
+      color: #d8d9db;
+      border-radius: 5px;
+      text-decoration: none;
+      font-weight: bold;
+      transition: background-color 0.3s;
+    }
+
+    .pdf-link:hover {
+      background-color: #3399dd;
+    }
+
+    .skills-grid.projects a div {
+      min-height: 220px;
+    }
+
+    .timeline-tree {
+      position: relative;
+      max-width: 1000px;
+      margin: 50px auto;
+      padding: 10px 0;
+    }
+
+    .timeline-tree::after {
+      content: '';
+      position: absolute;
+      width: 6px;
+      background-color: #4dafff;
+      top: 0;
+      bottom: 0;
+      left: 50%;
+      margin-left: -3px;
+    }
+
+    .timeline-item {
+      padding: 20px 30px;
+      position: relative;
+      width: 50%;
+    }
+
+    .timeline-item .content {
+      padding: 20px;
+      background-color: rgba(0, 0, 0, 0.8);
+      color: #fff;
+      border-radius: 8px;
+      box-shadow: 0 4px 10px rgba(0, 0, 0, 0.4);
+    }
+
+    .timeline-item.left {
+      left: 0;
+    }
+
+    .timeline-item.right {
+      left: 50%;
+    }
+
+    .timeline-item::before {
+      content: " ";
+      position: absolute;
+      top: 20px;
+      width: 20px;
+      height: 20px;
+      border-radius: 50%;
+      background-color: #4dafff;
+      border: 4px solid #fff;
+      z-index: 1;
+    }
+
+    .timeline-item.left::before {
+      right: -10px;
+    }
+
+    .timeline-item.right::before {
+      left: -10px;
+    }
+
+    @media screen and (max-width: 768px) {
+      .timeline-item {
+        width: 100%;
+        left: 0 !important;
+        margin-bottom: 30px;
+      }
+
+      .timeline-tree::after {
+        left: 20px;
+      }
+
+      .timeline-item.left::before,
+      .timeline-item.right::before {
+        left: 8px;
+      }
+
+      .timeline-item .content {
+        margin-left: 40px;
+      }
+    }
+  </style>
+</head>
+
+<body>
+
+  <!-- Background Video -->
+  <video autoplay muted loop id="bg-video">
+    <source src="diggg.mp4" type="video/mp4">
+    Your browser does not support the video tag.
+  </video>
+
+  <header class="main-header">
+    
+    <nav class="main-nav">
+      <h1 class="name-title">M. Dinesh</h1>
+      <h2 class="role-subtitle">FULL STACK DEVELOPER AND WEB DESIGNER</h2>
+      <ul>
+        <li><a href="#about">About</a></li>
+        <li><a href="#education">Education</a></li>
+        <li><a href="#projects">Projects</a></li>
+        <li><a href="#skills">Skills</a></li>
+        <li><a href="#profiles">Profiles</a></li>
+        <li><a href="#certifications">Certifications</a></li>
+        <li><a href="#contact">Contact</a></li>
+      </ul>
+    </nav>
+  </header>
+
+  <section id="about">
+    <h2 class="section-title">About Me</h2>
+    <div style="display: flex; flex-wrap: wrap; align-items: center; justify-content: center; gap: 2rem; margin-top: 1rem;">
+      <div style="flex: 1; max-width: 250px; text-align: center;">
+        <img src="profiile.jpg" alt="Dinesh's Photo" style="width: 100%; border-radius: 15px; box-shadow: 0 4px 12px rgba(0,0,0,0.5);">
+      </div>
+      <div style="flex: 2; max-width: 700px; font-size: 1.1rem; line-height: 1.7;">
+        <p>Hello! I’m <strong>M. Dinesh</strong>, a passionate Computer Science & Engineering student from MVGR College of Engineering, expected to graduate in 2026.</p>
+        <p>I specialize in <strong>Full Stack Web Development</strong> and have hands-on experience building projects using modern technologies such as React.js, Java, PHP, and MySQL.</p>
+        <p>My interests lie in developing scalable software, exploring AI, and mastering backend systems. I constantly seek to improve my skills and contribute to meaningful projects.</p>
+        <p>When I’m not coding, I enjoy exploring tech communities, learning new tools, and building personal projects that challenge me.</p>
+      </div>
+    </div>
+  </section>
+
+  <section id="education">
+    <h2 class="section-title">Education</h2>
+    <div class="timeline-tree">
+
+      <!-- SSC -->
+      <div class="timeline-item left">
+        <div class="content">
+          <h3>SSC - 10th Standard</h3>
+          <h4>Balaji High School (2018)</h4>
+          <p>Scored 90% and built a strong foundation in mathematics and science, which sparked interest in computing and logic-based problem solving.</p>
+        </div>
+      </div>
+
+      <!-- Diploma -->
+      <div class="timeline-item right">
+        <div class="content">
+          <h3>Diploma in Computer Science</h3>
+          <h4>Govt Polytechnic College, Anakapalli (2020–2023)</h4>
+          <p>Completed a 3-year diploma with 76%. Gained hands-on experience in C, Java, DBMS, Web Development, and participated in industrial training.</p>
+        </div>
+      </div>
+
+      <!-- B.Tech -->
+      <div class="timeline-item left">
+        <div class="content">
+          <h3>B.Tech in Computer Science and Engineering</h3>
+          <h4>MVGR College of Engineering (2023–2026)</h4>
+          <p>Currently pursuing B.Tech with a strong focus on Full Stack Web Development, AI/ML, and Software Engineering. Actively building real-world projects and improving coding proficiency.</p>
+        </div>
+      </div>
+
+    </div>
+  </section>
+
+  <section id="projects">
+    <h2 class="section-title">Projects</h2>
+    <div class="skills-grid projects">
+      <a href="https://github.com/dinesh-0725/layer.git" target="_blank" style="text-decoration: none; color: inherit;">
+        <div>
+          <h3>Lawyer Consultancy Website</h3>
+          <p>A responsive website where users can book consultations with lawyers. Includes login, search, and admin dashboard.</p>
+          <p><strong>Tech Used:</strong> HTML, CSS, JavaScript, PHP, MySQL</p>
+        </div>
+      </a>
+      <a href="https://github.com/dinesh-0725/Defect-Handling.git" target="_blank" style="text-decoration: none; color: inherit;">
+        <div>
+          <h3>Detection Management System</h3>
+          <p>Enterprise system for defect tracking and workflow in steel plant environments. Role-based dashboards for employees, mechanics, and admin.</p>
+          <p><strong>Tech Used:</strong> Java Full Stack (JSP, Servlets, JDBC, Oracle)</p>
+        </div>
+      </a>
+      <a href="https://github.com/dinesh-0725/chat-application.git" target="_blank" style="text-decoration: none; color: inherit;">
+        <div>
+          <h3>Random Chat Application</h3>
+          <p>Real-time anonymous chatting between users using React and WebSocket support.</p>
+          <p><strong>Tech Used:</strong> React.js, Node.js</p>
+        </div>
+      </a>
+    
+      <a href="https://github.com/dinesh-0725/hreion.git" target="_blank" style="text-decoration: none; color: inherit;">
+        <div>
+          <h3>HREION - ERP Management System</h3>
+          <p>
+            A comprehensive ERP-based web application designed to manage organizational operations such as employees, departments, roles, and workflows through a centralized system.
+          </p>
+          <p>
+            <strong>Tech Used:</strong> React.js, Node.js</p>
+        </div>
+      </a>
+      </div>
+
+  </section>
+
+  <section id="skills">
+    <h2 class="section-title">Skills</h2>
+
+    <h3 style="color:#4dafff; margin-top: 1rem;">Web Skills</h3>
+    <div class="skills-grid">
+      <div><img src="https://cdn.jsdelivr.net/gh/devicons/devicon/icons/html5/html5-original.svg"><span>HTML</span></div>
+      <div><img src="https://cdn.jsdelivr.net/gh/devicons/devicon/icons/css3/css3-original.svg"><span>CSS</span></div>
+      <div><img src="https://cdn.jsdelivr.net/gh/devicons/devicon/icons/javascript/javascript-original.svg"><span>JavaScript</span></div>
+      <div><img src="https://cdn.jsdelivr.net/gh/devicons/devicon/icons/react/react-original.svg"><span>React.js</span></div>
+    </div>
+
+    <h3 style="color:#4dafff; margin-top: 2rem;">Programming Languages</h3>
+    <div class="skills-grid">
+      <div><img src="https://cdn.jsdelivr.net/gh/devicons/devicon/icons/java/java-original.svg"><span>Java</span></div>
+      <div><img src="https://cdn.jsdelivr.net/gh/devicons/devicon/icons/python/python-original.svg"><span>Python</span></div>
+      <div><img src="https://cdn.jsdelivr.net/gh/devicons/devicon/icons/cplusplus/cplusplus-original.svg"><span>C++ (Basic)</span></div>
+      <div><img src="https://cdn.jsdelivr.net/gh/devicons/devicon/icons/c/c-original.svg"><span>C (Basic)</span></div>
+    </div>
+
+    <h3 style="color:#4dafff; margin-top: 2rem;">Database</h3>
+    <div class="skills-grid">
+      <div><img src="https://cdn.jsdelivr.net/gh/devicons/devicon/icons/mysql/mysql-original.svg"><span>MySQL / SQL</span></div>
+    </div>
+  </section>
+
+  <section id="profiles">
+    <h2 class="section-title">Profiles</h2>
+    <div class="profile-cards">
+      <a class="profile-box" href="https://github.com/dinesh-0725" target="_blank">
+        <h3>GitHub</h3>
+        <p>github.com/dinesh-0725</p>
+      </a>
+      <a class="profile-box" href="https://www.hackerrank.com/profile/metikotidinesh45" target="_blank">
+        <h3>HackerRank</h3>
+        <p>hackerrank.com/metikotidinesh45</p>
+      </a>
+      <a class="profile-box" href="https://www.linkedin.com/in/dinesh-metikoti-9b1955278" target="_blank">
+        <h3>LinkedIn</h3>
+        <p>linkedin.com/in/dinesh-metikoti-9b1955278</p>
+      </a>
+    </div>
+  </section>
+
+<section id="certifications">
+  <h2 class="section-title">Certifications</h2>
+  <div class="certification-list">
+
+    <div class="certification-box">
+      <h3>Java Full Stack Certification</h3>
+      <ul>
+        <li>Project: Defect Handling in Steel Plant</li>
+      </ul>
+      <a href="full_stack_certificate.pdf" target="_blank" class="pdf-link">View Certificate</a>
+    </div>
+
+    <div class="certification-box">
+      <h3>Industrial Training - Machine Learning</h3>
+      <ul>
+        <li>Recommendation System using Python (HMI Services)</li>
+      </ul>
+      <a href="machine_learning.pdf" target="_blank" class="pdf-link">View Certificate</a>
+    </div>
+
+    <div class="certification-box">
+      <h3>Python Essentials 1 & 2</h3>
+      <p>Completed via Cisco Networking Academy (MVGR College of Engineering)</p>
+      <ul>
+        <li>Python Essentials 1 – Completed on 13 Jun 2025</li>
+        <li>Python Essentials 2 – Completed on 14 Jun 2025</li>
+      </ul>
+      <a href="python essentials.pdf" target="_blank" class="pdf-link">View Certificate</a>
+    </div>
+
+    <div class="certification-box">
+      <h3>Cisco CCNA Certification Track</h3>
+      <ul>
+        <li>Introduction to Networks</li>
+        <li>Switching, Routing, and Wireless Essentials</li>
+        <li>Enterprise Networking, Security, and Automation</li>
+        <li>Introduction to Cybersecurity</li>
+      </ul>
+      <a href="CCNA.pdf" target="_blank" class="pdf-link">View All Certificates</a>
+    </div>
+     <div class="certification-box">
+      <h3>FORGE</h3>
+      <ul>
+        <li>DATA VISUALISATION </li>
+        
+      </ul>
+      <a href="data.pdf" target="_blank" class="pdf-link">View Certificate</a>
+    </div>
+
+  </div>
+</section>
+
+
+
+  <section id="contact">
+    <h2 class="section-title">Contact</h2>
+    <div class="contact-box">
+      <h3>Email</h3>
+      <p><a href="mailto:metikotidinesh45@gmail.com">metikotidinesh45@gmail.com</a></p>
+    </div>
+  </section>
+  <script>
+  document.addEventListener("DOMContentLoaded", () => {
+    const sections = document.querySelectorAll("section");
+
+    const observer = new IntersectionObserver(
+      (entries) => {
+        entries.forEach((entry) => {
+          if (entry.isIntersecting) {
+            // Dim all sections first
+            sections.forEach((sec) => sec.classList.add("dimmed"));
+            // Highlight the active one
+            entry.target.classList.remove("dimmed");
+          }
+        });
+      },
+      { threshold: 0.5 } // At least 50% visible = considered active
+    );
+
+    sections.forEach((section) => observer.observe(section));
+  });
+</script>
+
+
+</body>
+
+</html>
